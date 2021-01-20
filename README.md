@@ -16,6 +16,14 @@
 ----------------
 ### 라즈베리파이 - Jetson 연결 시 필요한 절차
 - 같은 핫스팟에 RPi랑 Jetson 연결
-- RPi python 코드에서 IP 주소 Jetson의 사설 IP 주소로 바꾸기
+- 라즈베리파이 python 코드에서 IP 주소 Jetson의 사설 IP 주소로 바꾸기 (`ifconfig`)
 - Jetson 방화벽 설정 restore 하기
+  - `sudo iptables-restore < 201022.rules` 
+  - 보안적 위험성 줄이기 위해 재부팅 때마다 다시 방화벽 설정 restore
 - (맨 처음 한 번만) `sudo chown -R www-data:www-data /var/www`
+-----------------
+### 프로세스 id로 kill
+> 라즈베리파이로 QR코드 인식부터 다시 이어서하면 멈추므로 그 사이에 기존 프로세스 kill 해주기
+- `ps -ef | grep darknet` 
+- `sudo ./darknet detect ~` 랑 자식 프로세스 `./darknet detect ~` PID 확인
+- 각각 `sudo kill -9 [PID]` 
