@@ -1,0 +1,10 @@
+<?php
+$filename = "/home/wbb/darknet/test_201016.txt";
+$fp = fopen($filename, "r") or die("Cannot open the file!\n");
+$buffer;
+
+while(!feof($fp)) {
+    //echo fgets($fp);  }
+
+fclose($fp);
+?>
