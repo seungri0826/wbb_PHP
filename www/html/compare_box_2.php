@@ -27,7 +27,6 @@ if ($_POST['isFirst'] == 1) {
               $context);
 
     /// Create star.txt
-    //$star_file_path = "/var/www/html/".$_POST["id"]."/".$_POST["id"]."_star.txt";
     $star_file = fopen($star_file_path, "w") or die("Unable to open file!");
     fwrite($star_file, "1");
     fclose($star_file);
@@ -50,9 +49,7 @@ $uid = $id;
 sleep(2); // 2sec delay
 
 // Count the number of detected boxes from detection result txt file
-////$filename = "/home/wbb/darknet/result_201106.txt";
-//$filename = "/var/www/html/".$_POST["id"]."/".$_POST["id"].".txt"; // 201108 수정 (실제 코드)
-$filename = "/home/wbb/darknet/".$_POST["id"].".txt"; // 201108 수정 (임시 코드)
+$filename = "/home/wbb/darknet/".$_POST["id"].".txt"; // 201108 edit
 $fp = fopen($filename, "r") or die("Cannot open the file!\n");
 $num_detected;
 $num_detected_tmp;
@@ -93,11 +90,10 @@ $num_delivered =  file_get_contents (
               $context);
 ///$return = gettype($num_delivered);
 $num_delivered_string = $num_delivered;
-$num_delivered = (int)$num_delivered; //paasta에 배달 완료된 택배 개수
+$num_delivered = (int)$num_delivered; //paas-ta에 배달 완료된 택배 개수
 
-//Jetson에서 파스타로부터 가져온 택배 도착 개수를 파일에 저장, 덮어쓰기 하는 코드
-//$file_path = "/var/www/html/examples.txt"; // 라즈베리파이 이미지가 저장되어있는 경로를 대입시켜야함. 소스코드가 없어 넣질 못하였습니다.
-$file_path = "/var/www/html/".$_POST["id"]."/".$_POST["id"]."_pre.txt"; // 201108 수정
+//Jetson에서 paas-ta로부터 가져온 택배 도착 개수를 파일에 저장, 덮어쓰기 하는 코드
+$file_path = "/var/www/html/".$_POST["id"]."/".$_POST["id"]."_pre.txt"; // 201108 edit
 
 $is_file_exist = file_exists($file_path); // './blog/test.txt'
 // 위 코드를 실행하는데 에러가 발생한다면, 하드 드라이브 쓰기 정보에 대한 PHP 파일 접근 권한을 확인하십시오.
@@ -122,8 +118,10 @@ else {
 /// Server response is now stored in $result variable so you can process it
 ///echo($result);
 
+
 // Compare the number of boxes 
 $situation = 0;
+
 // 1) 택배가 추가로 배달된 상황
 if ($num_delivered > $num_delivered_pre) {
     if ($num_detected == $num_delivered) {
@@ -137,7 +135,6 @@ if ($num_delivered > $num_delivered_pre) {
 	echo $situation;
 
 	// star.txt
-	//$star_file_path = "/var/www/html/".$_POST["id"]."/".$_POST["id"]."_star.txt";
         $star_file = fopen($star_file_path, "w") or die("Unable to open file!");
         fwrite($star_file, "2");
         fclose($star_file);
@@ -146,7 +143,6 @@ if ($num_delivered > $num_delivered_pre) {
     $myfile = fopen($file_path, "w") or die("Unable to open file!");
     $txt = $num_delivered_string;
     fwrite($myfile, $txt);
-
 }
 
 // 2) 택배가 배달되지 않은 상황 
@@ -161,43 +157,21 @@ else if($num_delivered == $num_delivered_pre){
     fclose($star_file);
 
     if ($star == 1) {
-    if($num_detected > $num_delivered){
-        //echo "택배원이 택배를 놓고있어 택배가 가려진 상황입니다.";
-        $situation = 3;
-        echo $situation;
-    }
-    else if ($num_detected < $num_delivered) {
-	    //echo "num_detected < num_delivered\n도난 상황으로 판단됩니다.\n";
-	    $situation = 4;
-	    /*
-	    if(isset($_POST['id'])){
-		$user_id = $_POST['id'];
-		$params = array ('uid' => $user_id);
-	    }else{ $params = array ('result' => 1000);}
-  	    $query = http_build_query ($params);
-
-	    /// Create Http context details
-	    $contextData = array ( 
-                'method' => 'POST',
-                'header' => "Content-Type: application/x-www-form-urlencoded\r\n".
-	  		    "Connection: close\r\n".
-                            "Content-Length: ".strlen($query)."\r\n",
-                'content'=> $query );
-
-	    /// Create context resource for our request
-	    $context = stream_context_create (array ( 'http' => $contextData ));
-	    $num_delivered =  file_get_contents (
-	                  'http://finaltest.paasta.koren.kr/changeIsStolen.php',  // page url
-           	    	  false,
-	                  $context);
-	    */
-            echo $situation;
-    }
-    else {
-	    //echo "num_detected == num_delivered\n정상 상황입니다.\n";
-	    $situation = 5;
-            echo $situation;
-    }
+	    if($num_detected > $num_delivered){
+		//echo "택배원이 택배를 놓고있어 택배가 가려진 상황입니다.";
+		$situation = 3;
+		echo $situation;
+	    }
+	    else if ($num_detected < $num_delivered) {
+		    //echo "num_detected < num_delivered\n도난 상황으로 판단됩니다.\n";
+		    $situation = 4;
+		    echo $situation;
+	    }
+	    else {
+		    //echo "num_detected == num_delivered\n정상 상황입니다.\n";
+		    $situation = 5;
+		    echo $situation;
+	    }
     }
 
     else if ($num_detected == $num_delivered) {
@@ -240,8 +214,11 @@ else {
 }
 
 
-
-// 201108) HTTP POST를 if문 밖으로. isStolen 대신 situation 값을 PaaS-TA로
+/*
+** 201108 edit) 
+** - HTTP POST를 if문 밖으로 꺼냈다. 
+** - isStolen 대신 situation 값을 PaaS-TA로 보낸다.
+*/
 if(isset($_POST['id'])){
     $user_id = $_POST['id'];
     $params = array ('uid' => $user_id, 'situation' => $situation);
@@ -262,6 +239,4 @@ $num_delivered =  file_get_contents (
 		'http://finaltest.paasta.koren.kr/changeIsStolen.php',  // page url
 		false,
 		$context);
-
-
 ?>
