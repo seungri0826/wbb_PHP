@@ -20,36 +20,10 @@ while(true) {
 	$num_delivered = 4;
 	$num_delivered_pre = 4;
 	
-	/*
-	//Jetson에서 파스타로부터 가져온 택배 도착 개수를 파일에 저장, 덮어쓰기 하는 코드
-	$file_path = "/var/www/html/examples.txt"; // 라즈베리파이 이미지가 저장되어있는 경로를 대입시켜야함. 소스코드가 없어 넣질 못하였습니다.
-
-	$is_file_exist = file_exists($file_path); // './blog/test.txt'
-	// 위 코드를 실행하는데 에러가 발생한다면, 하드 드라이브 쓰기 정보에 대한 PHP 파일 접근 권한을 확인하십시오.
-	if ($is_file_exist) {
-	    $fp = fopen($file_path, "r") or die("Cannot open the file!\n");
-	    while(!feof($fp)) {
-	        $num_delivered_tmp = fgets($fp);
-	        if (!$num_delivered_tmp) break;
-	        $num_delivered_pre = (int)$num_delivered_tmp;
-	    }
-	    fclose($fp);
-	    echo 'Found it';
-	}
-	else {
-	    $myfile = fopen($file_path, "w") or die("Unable to open file!");
-	    $txt = $num_delivered_string;
-	    //fwrite($file_path, $txt);
-	    fwrite($myfile, $txt);
-	    echo 'Not found.';
-	  }
-
-	echo "num_delivered = ".$num_delivered."\n\n";
-	*/
-
 	$file_path = "/var/www/html/examples.txt";
 	// Compare the number of boxes 
 	$situation = 0;
+	
 	// 1) 택배가 추가로 배달된 상황
 	if ($num_delivered > $num_delivered_pre) {
 	    if ($num_detected == $num_delivered) {
@@ -61,14 +35,12 @@ while(true) {
 		echo "추가 배달 후 num_detected != num_delivered\n택배 배달 과정에서 문제가 발생하였습니다.\nQR코드 인식이 누락되었거나 택배 상자가 가려져 인식에 문제가 있습니다.\n";
 		$situation = 2;
 		echo $situation;
-
 	    }
 
 	    $myfile = fopen($file_path, "w") or die("Unable to open file!");
 	    $txt = $num_delivered_string;
 	    //fwrite($file_path, $txt);
 	    fwrite($myfile, $txt);
-
 	}
 
 	// 2) 택배가 배달되지 않은 상황 
