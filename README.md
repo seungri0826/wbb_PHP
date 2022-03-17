@@ -14,11 +14,17 @@
   - 실험용 코드
   - n초마다 다시 실행시켜주는 라즈베리파이 없이 수행한 실험이므로, `while(true)` 문 안에 `sleep(5);` 사용해서 5초 delay 부여하며 반복 실행
 
+<br>
+
 ## 전체 동작
 ![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/1f28e5de-cdc0-4623-b18c-e2d83b296b98/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220317%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220317T054347Z&X-Amz-Expires=86400&X-Amz-Signature=8eb87a9e94e91b59c9c95b491572d949b8d718e144019e5c7f4641b5ba03e965&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject)
 
+<br>
+
 ## 도난 상황 감지 알고리즘 (star 알고리즘)
 ![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/b999aaa6-3531-49b2-81e6-9da04e8944bf/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220317%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220317T054345Z&X-Amz-Expires=86400&X-Amz-Signature=b0feb7aa72e25761187f936cf5181c09cc9724808f419b8971cb87b8e5163a4f&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject)
+
+<br>
 
 ## 라즈베리파이 - Jetson 연결 시 필요한 절차
 - 같은 핫스팟에 RPi랑 Jetson 연결
@@ -27,6 +33,8 @@
   - `sudo iptables-restore < 201022.rules` 
   - 보안적 위험성 줄이기 위해 재부팅 때마다 다시 방화벽 설정 restore
 - (맨 처음 한 번만) `sudo chown -R www-data:www-data /var/www`
+
+<br>
 
 ## 프로세스 id로 kill
 > 라즈베리파이로 QR코드 인식부터 다시 이어서하면 멈추므로 그 사이에 기존 프로세스 kill 해주기
