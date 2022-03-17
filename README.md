@@ -23,7 +23,7 @@
 
 <br>
 
-## 도난 상황 감지 알고리즘 (star 알고리즘)
+## 도난 상황 감지 알고리즘
 ![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/b999aaa6-3531-49b2-81e6-9da04e8944bf/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220317%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220317T054345Z&X-Amz-Expires=86400&X-Amz-Signature=b0feb7aa72e25761187f936cf5181c09cc9724808f419b8971cb87b8e5163a4f&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject)
 
 <br>
